@@ -1,5 +1,6 @@
 package com.kumara.Ecom_Spring_MVC_Project.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -15,19 +16,19 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
-    private String description;
+    private String desc;
     private String brand;
     private BigDecimal price;
     private String category;
     private Date releaseDate;
-    private boolean availability;
+    private boolean available;
     private int quantity;
-
 
 
 }

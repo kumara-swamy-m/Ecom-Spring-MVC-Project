@@ -3,14 +3,15 @@ package com.kumara.Ecom_Spring_MVC_Project.controller;
 
 import com.kumara.Ecom_Spring_MVC_Project.model.Product;
 import com.kumara.Ecom_Spring_MVC_Project.service.ProductService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 
 @RestController
+@CrossOrigin
 @RequestMapping("/api")
 public class ProductController {
 
@@ -27,8 +28,16 @@ public class ProductController {
 
     }
     @GetMapping("/products")
-    public List<Product> getProducts(){
+    public ResponseEntity<List<Product>> getProducts(){
 
-        return service.getProducts();
+        return new ResponseEntity<>(service.getProducts(), HttpStatus.OK);
+    }
+    @GetMapping("/product/{id}")
+    public  ResponseEntity<Product> getProductById(@PathVariable int id){
+        Product product = service.getProductsById(id);
+        if(product!=null)
+        return new ResponseEntity<>(product,HttpStatus.OK) ;
+        else
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 }
