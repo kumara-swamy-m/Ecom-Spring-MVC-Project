@@ -41,4 +41,8 @@ public class ProductService {
         return  repo.save(product);
 
     }
+
+    public void deleteProducts(int id) {
+        repo.deleteById(id);
+    }
 }

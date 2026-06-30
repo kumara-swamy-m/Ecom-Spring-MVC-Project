@@ -56,6 +56,7 @@ public class ProductController {
         }
 
     }
+
     @GetMapping("/product/{productId}/image")
     public ResponseEntity<byte []> getImageByyProductId(@PathVariable int productId){
         Product product = service.getProductsById(productId);
@@ -77,6 +78,22 @@ public class ProductController {
        return new ResponseEntity<>("Updated", HttpStatus.OK);
    else
        return  new ResponseEntity<>("Failed to update",HttpStatus.BAD_REQUEST);
+    }
+
+    @DeleteMapping("/product/{id}")
+    public ResponseEntity<String> deleteProducts(@PathVariable int id){
+        Product product = service.getProductsById(id);
+        if(product!=null) {
+            service.deleteProducts(id);
+            return new ResponseEntity<>("Deleted", HttpStatus.OK);
+
+        }
+        else
+            return new ResponseEntity<>("Product not found",HttpStatus.NOT_FOUND);
+
+
+
+
     }
 
 
